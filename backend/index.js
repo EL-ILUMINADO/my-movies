@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === "production") {
 
   // ✅ Catch-all route to send index.html
   app.get("*", (req, res) => {
+    console.log("Serving frontend:", path.resolve(frontendPath, "index.html"));
     res.sendFile(path.resolve(frontendPath, "index.html"));
   });
 }
