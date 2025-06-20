@@ -41,4 +41,13 @@ app.use("/api/v1/upload", uploadRoutes);
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 
+// Serve frontend build (React's dist folder)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+  );
+}
+
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
